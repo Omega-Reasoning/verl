@@ -363,6 +363,14 @@ def compute_timing_metrics(batch, timing_raw):
             f'timing_per_token_ms/{name}': timing_raw[name] * 1000 / num_tokens_of_section[name] for name in set(num_tokens_of_section.keys(
             )) & set(timing_raw.keys())
         },
+        **{
+            f'token_per_sec_generated/{name}':num_response_tokens/timing_raw[name] for name in set(num_tokens_of_section.keys(
+            )) & set(timing_raw.keys())
+        },
+        **{
+            f'token_throughput(tok/s)/ {name}':num_overall_tokens/timing_raw[name] for name in set(num_tokens_of_section.keys(
+            )) & set(timing_raw.keys())
+        },
     }
 
 
